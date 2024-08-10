@@ -1,26 +1,20 @@
-//
-//  Interceptor.swift
-//  SRNetworkLayer
-//
-//  Created by Siamak on 7/23/24.
-//
-
 import Combine
 import Foundation
 
 // MARK: - RetryHandlerProtocol
 
 protocol RetryHandlerProtocol {
+    associatedtype ErrorType: CustomErrorProtocol
     var numberOfRetries: Int { get }
-    func shouldRetry(request: URLRequest, error: NetworkError) -> Bool
-    func modifyRequestForRetry(client: APIClient, request: URLRequest, error: NetworkError) -> (URLRequest, NetworkError?)
-    func shouldRetryAsync(request: URLRequest, error: NetworkError) async -> Bool
-    func modifyRequestForRetryAsync(client: APIClient, request: URLRequest, error: NetworkError) async throws -> URLRequest
+    func shouldRetry(request: URLRequest, error: NetworkError<ErrorType>) -> Bool
+    func modifyRequestForRetry(client: APIClient<ErrorType>, request: URLRequest, error: NetworkError<ErrorType>) -> (URLRequest, NetworkError<ErrorType>?)
+    func shouldRetryAsync(request: URLRequest, error: NetworkError<ErrorType>) async -> Bool
+    func modifyRequestForRetryAsync(client: APIClient<ErrorType>, request: URLRequest, error: NetworkError<ErrorType>) async throws -> URLRequest
 }
 
 // MARK: - DefaultRetryHandler
 
-class Interceptor: RetryHandlerProtocol {
+class Interceptor<ErrorType: CustomErrorProtocol>: RetryHandlerProtocol {
     let numberOfRetries: Int
 
     init(numberOfRetries: Int) {
@@ -28,22 +22,22 @@ class Interceptor: RetryHandlerProtocol {
     }
 
     @discardableResult
-    func shouldRetry(request: URLRequest, error: NetworkError) -> Bool {
+    func shouldRetry(request: URLRequest, error: NetworkError<ErrorType>) -> Bool {
         return numberOfRetries > 0
     }
 
     @discardableResult
-    func modifyRequestForRetry(client: APIClient, request: URLRequest, error: NetworkError) -> (URLRequest, NetworkError?) {
+    func modifyRequestForRetry(client: APIClient<ErrorType>, request: URLRequest, error: NetworkError<ErrorType>) -> (URLRequest, NetworkError<ErrorType>?) {
         return (request, error)
     }
 
     @discardableResult
-    func shouldRetryAsync(request: URLRequest, error: NetworkError) async -> Bool {
+    func shouldRetryAsync(request: URLRequest, error: NetworkError<ErrorType>) async -> Bool {
         return numberOfRetries > 0
     }
 
     @discardableResult
-    func modifyRequestForRetryAsync(client: APIClient, request: URLRequest, error: NetworkError) async throws -> URLRequest {
+    func modifyRequestForRetryAsync(client: APIClient<ErrorType>, request: URLRequest, error: NetworkError<ErrorType>) async throws -> URLRequest {
         return request
     }
 }

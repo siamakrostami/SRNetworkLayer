@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010C6FCB2C67D4A800311653 /* CustomErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010C6FCA2C67D4A800311653 /* CustomErrorProtocol.swift */; };
 		0169BAD92C52C0EC008618CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAD82C52C0EC008618CA /* AppDelegate.swift */; };
 		0169BADB2C52C0EC008618CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BADA2C52C0EC008618CA /* SceneDelegate.swift */; };
 		0169BADD2C52C0EC008618CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BADC2C52C0EC008618CA /* ViewController.swift */; };
@@ -22,7 +23,7 @@
 		0169BB132C52C12D008618CA /* NetworkParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAFB2C52C12D008618CA /* NetworkParameterEncoding.swift */; };
 		0169BB142C52C12D008618CA /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAFC2C52C12D008618CA /* NetworkRouter.swift */; };
 		0169BB152C52C12D008618CA /* UploadProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAFD2C52C12D008618CA /* UploadProgressDelegate.swift */; };
-		0169BB162C52C12D008618CA /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAFF2C52C12D008618CA /* ErrorResponse.swift */; };
+		0169BB162C52C12D008618CA /* GeneralErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BAFF2C52C12D008618CA /* GeneralErrorResponse.swift */; };
 		0169BB172C52C12D008618CA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB002C52C12D008618CA /* NetworkError.swift */; };
 		0169BB182C52C12D008618CA /* HeaderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB022C52C12D008618CA /* HeaderHandler.swift */; };
 		0169BB192C52C12D008618CA /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169BB042C52C12D008618CA /* NetworkInterceptor.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010C6FCA2C67D4A800311653 /* CustomErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorProtocol.swift; sourceTree = "<group>"; };
 		0169BAD52C52C0EC008618CA /* SRNetworkLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRNetworkLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0169BAD82C52C0EC008618CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0169BADA2C52C0EC008618CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		0169BAFB2C52C12D008618CA /* NetworkParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkParameterEncoding.swift; sourceTree = "<group>"; };
 		0169BAFC2C52C12D008618CA /* NetworkRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		0169BAFD2C52C12D008618CA /* UploadProgressDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadProgressDelegate.swift; sourceTree = "<group>"; };
-		0169BAFF2C52C12D008618CA /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		0169BAFF2C52C12D008618CA /* GeneralErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralErrorResponse.swift; sourceTree = "<group>"; };
 		0169BB002C52C12D008618CA /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		0169BB022C52C12D008618CA /* HeaderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderHandler.swift; sourceTree = "<group>"; };
 		0169BB042C52C12D008618CA /* NetworkInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
@@ -83,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010C6FCE2C67D7CB00311653 /* CustomError */ = {
+			isa = PBXGroup;
+			children = (
+				0169BAFF2C52C12D008618CA /* GeneralErrorResponse.swift */,
+			);
+			path = CustomError;
+			sourceTree = "<group>";
+		};
 		0169BACC2C52C0EC008618CA = {
 			isa = PBXGroup;
 			children = (
@@ -172,8 +182,8 @@
 		0169BB012C52C12D008618CA /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				0169BAFF2C52C12D008618CA /* ErrorResponse.swift */,
 				0169BB002C52C12D008618CA /* NetworkError.swift */,
+				010C6FCA2C67D4A800311653 /* CustomErrorProtocol.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -223,6 +233,7 @@
 		0169BB0C2C52C12D008618CA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				010C6FCE2C67D7CB00311653 /* CustomError */,
 				0169BAFE2C52C12D008618CA /* Client */,
 				0169BB262C52C436008618CA /* Encoding */,
 				0169BB012C52C12D008618CA /* Error */,
@@ -407,7 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0169BB162C52C12D008618CA /* ErrorResponse.swift in Sources */,
+				0169BB162C52C12D008618CA /* GeneralErrorResponse.swift in Sources */,
 				0169BB172C52C12D008618CA /* NetworkError.swift in Sources */,
 				0169BAF42C52C127008618CA /* Inject.swift in Sources */,
 				0169BB1A2C52C12D008618CA /* NetworkRepositories.swift in Sources */,
@@ -425,6 +436,7 @@
 				0169BAF32C52C127008618CA /* Dependency.swift in Sources */,
 				0169BB312C52C4EA008618CA /* LoginService.swift in Sources */,
 				0169BB132C52C12D008618CA /* NetworkParameterEncoding.swift in Sources */,
+				010C6FCB2C67D4A800311653 /* CustomErrorProtocol.swift in Sources */,
 				0169BB142C52C12D008618CA /* NetworkRouter.swift in Sources */,
 				0169BB102C52C12D008618CA /* LogResponse.swift in Sources */,
 				0169BB1B2C52C12D008618CA /* RefreshTokenModel.swift in Sources */,

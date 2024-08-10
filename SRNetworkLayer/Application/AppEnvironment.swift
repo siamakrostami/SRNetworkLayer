@@ -10,7 +10,7 @@ struct AppEnvironment {
 extension AppEnvironment {
     static func setup() -> Self {
         setupQueue.sync {
-            Dependency.register(NetworkRepositories(client: APIClient().set(interceptor: NetworkInterceptor(numberOfRetries: 3))))
+            Dependency.register(NetworkRepositories(client: APIClient<GeneralErrorResponse>().set(interceptor: NetworkInterceptor(numberOfRetries: 3))))
         }
         return AppEnvironment()
     }

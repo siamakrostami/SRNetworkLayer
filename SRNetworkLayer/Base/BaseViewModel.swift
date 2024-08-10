@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - BaseViewModel
 
-class BaseViewModel {
+class BaseViewModel<Error: CustomErrorProtocol> {
     // MARK: Lifecycle
 
     init() {
@@ -25,8 +25,8 @@ class BaseViewModel {
 
     // MARK: Internal
 
-    @Inject var remoteRepositories: NetworkRepositories
-    var error = CurrentValueSubject<NetworkError?, Never>(nil)
+    @Inject var remoteRepositories: NetworkRepositories<GeneralErrorResponse>
+    var error = CurrentValueSubject<NetworkError<Error>?, Never>(nil)
 
     // MARK: Private
 
@@ -44,7 +44,7 @@ extension BaseViewModel {
                     return
                 }
                 let controller = (window.rootViewController)
-                controller?.showErrorAlert(title: "Error", message: errors.errorDescription ?? "")
+                controller?.showErrorAlert(title: "Error", message: errors.localizedErrorDescription ?? "")
             }
             .store(in: &self.cancellableSet)
     }

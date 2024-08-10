@@ -8,35 +8,29 @@
 import Combine
 import Foundation
 
-// MARK: - LoginServiceProtocols
-
-protocol LoginServiceProtocols {
-    func login(email: String, password: String) -> AnyPublisher<UserResponseModel, NetworkError>
-    func asyncLogin(email: String, password: String) async throws -> UserResponseModel
-}
 
 // MARK: - LoginService
 
-class LoginService {
+class LoginService<Error: CustomErrorProtocol> {
     // MARK: Lifecycle
 
-    init(client: APIClient) {
+    init(client: APIClient<Error>) {
         self.client = client
     }
 
     // MARK: Private
 
-    private let client: APIClient
+    private let client: APIClient<Error>
 }
 
 // MARK: LoginServiceProtocols
 
-extension LoginService: LoginServiceProtocols {
+extension LoginService {
     func asyncLogin(email: String, password: String) async throws -> UserResponseModel {
         try await client.asyncRequest(LoginRouter.login(email: email, password: password))
     }
 
-    func login(email: String, password: String) -> AnyPublisher<UserResponseModel, NetworkError> {
+    func login(email: String, password: String) -> AnyPublisher<UserResponseModel, NetworkError<Error>> {
         client.request(LoginRouter.login(email: email, password: password))
     }
 }

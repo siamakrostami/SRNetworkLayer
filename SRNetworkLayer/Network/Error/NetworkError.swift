@@ -9,29 +9,29 @@ import Foundation
 
 // MARK: - NetworkError
 
-enum NetworkError: Error {
+enum NetworkError<ErrorType: CustomErrorProtocol>: Error {
     case unknown
     case urlError(URLError)
     case decodingError(Error)
-    case customError(ErrorResponse)
+    case customError(ErrorType)
     case responseError(Int, Data)
 }
 
 // MARK: LocalizedError
 
 extension NetworkError: LocalizedError {
-    var errorDescription: String? {
+    var localizedErrorDescription: String? {
         switch self {
-            case .urlError(let urlError):
-                return urlError.localizedDescription
-            case .decodingError(let decodingError):
-                return decodingError.localizedDescription
-            case .customError(let errorModel):
-                return errorModel.message
-            case .unknown:
-                return "An unknown error occurred"
-            default:
-                return nil
+        case .urlError(let error):
+            return error.localizedDescription
+        case .decodingError(let error):
+            return error.localizedDescription
+        case .customError(let error):
+            return error.errorDescription
+        case .unknown:
+            return GeneralErrorResponse.unknown().errorDescription
+        default:
+            return nil
         }
     }
 }

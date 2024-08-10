@@ -8,35 +8,28 @@
 import Combine
 import Foundation
 
-// MARK: - RefreshTokenServicesProtocols
-
-protocol RefreshTokenServicesProtocols {
-    func refreshToken(token: String) -> AnyPublisher<RefreshTokenModel, NetworkError>
-    func asyncRefreshToken(token: String) async throws -> RefreshTokenModel
-}
-
 // MARK: - RefreshTokenServices
 
-class RefreshTokenServices {
+class RefreshTokenServices<Error: CustomErrorProtocol> {
     // MARK: Lifecycle
 
-    init(client: APIClient) {
+    init(client: APIClient<Error>) {
         self.client = client
     }
 
     // MARK: Private
 
-    private let client: APIClient
+    private let client: APIClient<Error>
 }
 
 // MARK: RefreshTokenServicesProtocols
 
-extension RefreshTokenServices: RefreshTokenServicesProtocols {
+extension RefreshTokenServices {
     func asyncRefreshToken(token: String) async throws -> RefreshTokenModel {
         return try await client.asyncRequest(RefreshTokenRouter.refreshToken(token: token))
     }
     
-    func refreshToken(token: String) -> AnyPublisher<RefreshTokenModel, NetworkError> {
+    func refreshToken(token: String) -> AnyPublisher<RefreshTokenModel, NetworkError<Error>> {
         client.request(RefreshTokenRouter.refreshToken(token: token))
     }
 }

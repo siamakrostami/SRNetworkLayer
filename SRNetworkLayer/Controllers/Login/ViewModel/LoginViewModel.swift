@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - LoginViewModel
 
-class LoginViewModel: BaseViewModel {
+class LoginViewModel: BaseViewModel<GeneralErrorResponse> {
     @Published var userModel: UserResponseModel?
     @Published var isLoading: Bool = false
     var loginCancellableSet = Set<AnyCancellable>()
@@ -43,7 +43,7 @@ extension LoginViewModel {
                 let response = try await remoteRepositories.loginServices?.asyncLogin(email: email, password: password)
                 userModel = response
                 isLoading = false
-            } catch let error as NetworkError {
+            } catch let error as NetworkError<GeneralErrorResponse> {
                 isLoading = false
                 self.error.send(error)
             }
